@@ -44,49 +44,45 @@ IPAddress dns2 = (uint32_t)0x00000000;
 const byte NUMBER_OF_NAMES = 8;
 char *names[NUMBER_OF_NAMES] = {"shonje", "bezveznjakovici", "digitroni", "glupsoni", "tupsoni", "praistorija", "neznalice", "nishta roba"};
 
-uint32_t totalPressCount = 0;
-
 // TODO: BM - explore OOP possibilites in arduino.
-struct Input
-{
-    const uint8_t PIN;
-    uint32_t keyPressCount;
-};
+
+volatile uint32_t pulseTime1, pulseTime2;
+volatile uint32_t card1, card2;
 
 // Define Maximus board terminal inputs
-Input input_J18 = {39, 0};
-Input input_J19 = {36, 0};
-Input input_J24 = {14, 0};
-Input input_J25 = {5, 0};
+#define WG1_D0 35 // J25
+#define WG1_D1 14 // J24
+#define WG1_LED 12 // J26
+#define WG2_D0 36 // J19
+#define WG2_D1 39 // J18
+#define WG2_LED 15 // J20
+#define OUT1 2 //J31
+#define OUT2 4 //J30
 
 // Define interrupt service routines
-void IRAM_ATTR isr_J18()
-{
-    totalPressCount++;
-    input_J18.keyPressCount++;
-    Serial.printf("J18 has been pressed %u times\n", input_J18.keyPressCount);
+void IRAM_ATTR isr_WG1_D0() {
+  if(digitalRead(WG1_D0) || digitalRead(WG1_D0)) return; // filter koji eliminiše kratke smetnje
+  card1 <<=1;
+  pulseTime1=millis();
 }
 
-void IRAM_ATTR isr_J19()
-{
-    totalPressCount++;
-    input_J19.keyPressCount++;
-    Serial.printf("J19 has been pressed %u times\n", input_J19.keyPressCount);
+void IRAM_ATTR isr_WG1_D1() {
+  if(digitalRead(WG1_D1) || digitalRead(WG1_D1)) return;
+  card1 <<= 1; ++card1;
+  pulseTime1=millis();
 }
 
-void IRAM_ATTR isr_J24()
-{
-    totalPressCount++;
-    input_J24.keyPressCount++;
-    Serial.printf("J24 has been pressed %u times\n", input_J24.keyPressCount);
+void IRAM_ATTR isr_WG2_D0() {
+  if(digitalRead(WG2_D0) || digitalRead(WG2_D0)) return;
+  card2 <<=1;
+  pulseTime2=millis();
+}
+void IRAM_ATTR isr_WG2_D1() {
+  if(digitalRead(WG2_D1) || digitalRead(WG2_D1)) return;
+  card2 <<=1; ++card2;
+  pulseTime2=millis();
 }
 
-void IRAM_ATTR isr_J25()
-{
-    totalPressCount++;
-    input_J25.keyPressCount++;
-    Serial.printf("J25 has been pressed %u times\n", input_J25.keyPressCount);
-}
 
 // Web page
 String myhtmlPage =
@@ -132,7 +128,7 @@ void handleAjax() // Callback
 {
     String message = "<b>- ";
     message += String(names[random(0, NUMBER_OF_NAMES)]); // Get random number  // could do millis(); also
-    message += " ^ " + String(totalPressCount);
+    message += " ^ " + String(card1);
     message += "</b>";
     server.send(200, "text/plain", message); // Send message back to page
 }
@@ -203,19 +199,30 @@ void setup()
     server.begin(); // Start server
     Serial.println("Web server started");
 
+    pinMode(WG1_D0, INPUT);
+    pinMode(WG1_D1, INPUT);
+    pinMode(WG1_LED, OUTPUT); digitalWrite(WG1_LED, HIGH); // nula je aktivna
+    pinMode(WG2_D0, INPUT);
+    pinMode(WG2_D1, INPUT);
+    pinMode(WG2_LED, OUTPUT); digitalWrite(WG2_LED, HIGH);
+    
+    pinMode(OUT1, OUTPUT); digitalWrite(OUT1, LOW); // jedinica je aktivna
+    pinMode(OUT2, OUTPUT); digitalWrite(OUT2, LOW);
+    
     // Attach interrupt for all 4 inputs on the board.
-    pinMode(input_J18.PIN, INPUT);
-    pinMode(input_J19.PIN, INPUT);
-    pinMode(input_J24.PIN, INPUT);
-    pinMode(input_J25.PIN, INPUT);
-
-    attachInterrupt(input_J18.PIN, isr_J18, FALLING);
-    attachInterrupt(input_J19.PIN, isr_J19, FALLING);
-    attachInterrupt(input_J24.PIN, isr_J24, FALLING);
-    attachInterrupt(input_J25.PIN, isr_J25, FALLING);
+    attachInterrupt(WG1_D0, isr_WG1_D0, FALLING);
+    attachInterrupt(WG1_D1, isr_WG1_D1, FALLING);
+    attachInterrupt(WG2_D0, isr_WG2_D0, FALLING);
+    attachInterrupt(WG2_D1, isr_WG2_D1, FALLING);
 }
 
 void loop()
 {
     server.handleClient(); // Handling web requests from clients
+    if(card1 && pulseTime1 && millis() > pulseTime1 + 10 ) {
+      Serial.print("CARD1="); Serial.print(card1, HEX); Serial.println(""); card1=0;
+    }
+    if(card2 && pulseTime2 && millis() > pulseTime2 + 10 ) {
+      Serial.print("CARD2="); Serial.print(card2, HEX); Serial.println(""); card2=0;
+    }
 }

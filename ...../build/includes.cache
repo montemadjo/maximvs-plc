@@ -1,0 +1,107 @@
+[
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/cores/esp32"
+  },
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/variants/esp32"
+  },
+  {
+    "Sourcefile": "/home/zoran/A/evirad sistemi/WT32/maximvs-plc/...../build/sketch/simple.ino.cpp",
+    "Include": "ETH.h",
+    "Includepath": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WiFi/src"
+  },
+  {
+    "Sourcefile": "/home/zoran/A/evirad sistemi/WT32/maximvs-plc/...../build/sketch/simple.ino.cpp",
+    "Include": "WebServer.h",
+    "Includepath": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WebServer/src"
+  },
+  {
+    "Sourcefile": "/home/zoran/A/evirad sistemi/WT32/maximvs-plc/...../build/sketch/simple.ino.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WiFi/src/ETH.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WiFi/src/WiFi.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WiFi/src/WiFiAP.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WiFi/src/WiFiClient.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WiFi/src/WiFiGeneric.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WiFi/src/WiFiMulti.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WiFi/src/WiFiSTA.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WiFi/src/WiFiScan.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WiFi/src/WiFiServer.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WiFi/src/WiFiUdp.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WebServer/src/Parsing.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WebServer/src/WebServer.cpp",
+    "Include": "FS.h",
+    "Includepath": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/FS/src"
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WebServer/src/WebServer.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/WebServer/src/detail/mimetable.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/FS/src/FS.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/zoran/.arduino15/packages/esp32/hardware/esp32/1.0.6/libraries/FS/src/vfs_api.cpp",
+    "Include": "",
+    "Includepath": null
+  }
+]
